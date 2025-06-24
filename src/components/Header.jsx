@@ -1,6 +1,12 @@
+import { useContext } from "react";
 import logo from "../assets/logo.jpg";
+import { CartContext } from "../store/cart-context";
 
-export default function Header() {
+export default function Header({ onCartClick }) {
+  const { items } = useContext(CartContext);
+  const uniqueItems = [...new Set(items.map((i) => i.id))].map((id) =>
+    items.find((it) => it.id === id)
+  );
   return (
     <header id="main-header">
       <div id="title">
@@ -8,7 +14,9 @@ export default function Header() {
         <img src={logo} alt="A restaurant image" />
       </div>
       <nav>
-        <button>Cart (0)</button>
+        <button className="button" onClick={onCartClick}>
+          Cart ({uniqueItems.length})
+        </button>
       </nav>
     </header>
   );

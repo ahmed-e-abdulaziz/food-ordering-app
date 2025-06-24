@@ -11,7 +11,8 @@ export default function Meals() {
 
   return (
     <section id="meals">
-      {meals.length > 0 && meals.map((meal) => <Meal meal={meal} />)}
+      {meals.length > 0 &&
+        meals.map((meal) => <Meal key={meal.id} meal={meal} />)}
     </section>
   );
 }
